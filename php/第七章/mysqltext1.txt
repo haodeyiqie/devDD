@@ -1,0 +1,43 @@
+mysql> create database 51zxe;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create database 51zxw;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 51zxw              |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create schema clive;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show create schema 51zxw;
++----------+----------------------------------------------------------------+
+| Database | Create Database                                                |
++----------+----------------------------------------------------------------+
+| 51zxw    | CREATE DATABASE `51zxw` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> use 51zxw;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| 51zxw      |
++------------+
+1 row in set (0.00 sec)
+
+mysql> drop database clive;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> \t

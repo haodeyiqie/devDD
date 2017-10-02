@@ -1,0 +1,85 @@
+mysql> \s
+--------------
+
+Connection id:		6
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Using delimiter:	;
+Server version:		5.6.22-log MySQL Community Server (GPL)
+Protocol version:	10
+Connection:		localhost via TCP/IP
+Server characterset:	utf8
+Db     characterset:	utf8
+Client characterset:	utf8
+Conn.  characterset:	utf8
+TCP port:		3306
+Uptime:			1 hour 35 min 51 sec
+
+Threads: 1  Questions: 57  Slow queries: 0  Opens: 73  Flush tables: 1  Open tables: 64  Queries per second avg: 0.009
+--------------
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 51zxw              |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use 51zxw;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| text            |
+| user            |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> desc user;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| userName | varchar(20) | YES  |     | NULL    |       |
+| age      | tinyint(4)  | YES  |     | NULL    |       |
+| salary   | float(8,2)  | YES  |     | NULL    |       |
+| tel      | int(11)     | YES  |     | NULL    |       |
+| email    | varchar(20) | YES  |     | NULL    |       |
+| addr     | varchar(50) | YES  |     | NULL    |       |
+| married  | tinyint(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT user values(1,'Clive',27,1000.10,13800,'12412@qq.com','成都',0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM user;
++------+----------+------+---------+-------+--------------+--------+---------+
+| id   | userName | age  | salary  | tel   | email        | addr   | married |
++------+----------+------+---------+-------+--------------+--------+---------+
+|    1 | Clive    |   27 | 1000.10 | 13800 | 12412@qq.com | 成都   |       0 |
++------+----------+------+---------+-------+--------------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user values(1,null,27,1000.10,13800,'12412@qq.com','成都',0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM user;
++------+----------+------+---------+-------+--------------+--------+---------+
+| id   | userName | age  | salary  | tel   | email        | addr   | married |
++------+----------+------+---------+-------+--------------+--------+---------+
+|    1 | Clive    |   27 | 1000.10 | 13800 | 12412@qq.com | 成都   |       0 |
+|    1 | NULL     |   27 | 1000.10 | 13800 | 12412@qq.com | 成都   |       0 |
++------+----------+------+---------+-------+--------------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user values(1,null,27,10009999.1000,13800,'12412@qq.com','成都',0);
+ERROR 1264 (22003): Out of range value for column 'salary' at row 1
+mysql> \T E:\mysqlDemo\mysqltext6.txt

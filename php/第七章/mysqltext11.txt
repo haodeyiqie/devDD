@@ -1,0 +1,150 @@
+mysql> USE 51zxw;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE table IF NOT EXISTS user6(
+    -> id INT KEY AUTO_INCREMENT,
+    -> userName varchar(20) NOT NULL,
+    -> passWrod varchar(20) NOT NULL,
+    -> addr varchar(20) DEFAULT '中国',
+    -> age TINYINT
+    -> )ENGINE=INNODB;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
++-----------------+
+7 rows in set (0.00 sec)
+
+mysql> desc user6;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| userName | varchar(20) | NO   |     | NULL    |                |
+| passWrod | varchar(20) | NO   |     | NULL    |                |
+| addr     | varchar(20) | YES  |     | 中国    |                |
+| age      | tinyint(4)  | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT user6 values(1,'clive','123456','成都',27);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user6;
++----+----------+----------+--------+------+
+| id | userName | passWrod | addr   | age  |
++----+----------+----------+--------+------+
+|  1 | clive    | 123456   | 成都   |   27 |
++----+----------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user(userName,passWrod) values('51zxw','124566');
+ERROR 1054 (42S22): Unknown column 'passWrod' in 'field list'
+mysql> INSERT user(userName,passWrod) values('51zxw','124566');
+ERROR 1054 (42S22): Unknown column 'passWrod' in 'field list'
+mysql> INSERT user6(userName,passWrod) values('51zxw','124566');
+Query OK, 1 row affected (0.35 sec)
+
+mysql> select * from user6;
++----+----------+----------+--------+------+
+| id | userName | passWrod | addr   | age  |
++----+----------+----------+--------+------+
+|  1 | clive    | 123456   | 成都   |   27 |
+|  2 | 51zxw    | 124566   | 中国   | NULL |
++----+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user6(passWrod,userName) values('123123123','zxw');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user6;
++----+----------+-----------+--------+------+
+| id | userName | passWrod  | addr   | age  |
++----+----------+-----------+--------+------+
+|  1 | clive    | 123456    | 成都   |   27 |
+|  2 | 51zxw    | 124566    | 中国   | NULL |
+|  3 | zxw      | 123123123 | 中国   | NULL |
++----+----------+-----------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT user6 values(4,'小王','xiaowang','北京',20),(5,'小明','xiaoming','上海',25),(6,'小红','xiaohong','深圳',18);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from user6;
++----+----------+-----------+--------+------+
+| id | userName | passWrod  | addr   | age  |
++----+----------+-----------+--------+------+
+|  1 | clive    | 123456    | 成都   |   27 |
+|  2 | 51zxw    | 124566    | 中国   | NULL |
+|  3 | zxw      | 123123123 | 中国   | NULL |
+|  4 | 小王     | xiaowang  | 北京   |   20 |
+|  5 | 小明     | xiaoming  | 上海   |   25 |
+|  6 | 小红     | xiaohong  | 深圳   |   18 |
++----+----------+-----------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT user6 SET id=7,userNmae='老王',passWrod='laowang',addr='成都',age=10;
+ERROR 1054 (42S22): Unknown column 'userNmae' in 'field list'
+mysql> INSERT user6 SET id=7,userName='老王',passWrod='laowang',addr='成都',age=10;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user6;
++----+----------+-----------+--------+------+
+| id | userName | passWrod  | addr   | age  |
++----+----------+-----------+--------+------+
+|  1 | clive    | 123456    | 成都   |   27 |
+|  2 | 51zxw    | 124566    | 中国   | NULL |
+|  3 | zxw      | 123123123 | 中国   | NULL |
+|  4 | 小王     | xiaowang  | 北京   |   20 |
+|  5 | 小明     | xiaoming  | 上海   |   25 |
+|  6 | 小红     | xiaohong  | 深圳   |   18 |
+|  7 | 老王     | laowang   | 成都   |   10 |
++----+----------+-----------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE table IF NOT EXISTS user7(
+    -> userName varchar(20) NOT NULL,
+    -> passWrod varchar(20) NOT NULL
+    -> )ENGINE=INNODB;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT user7 SELECT userName,passWrod FROM user6;
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from user7;
++----------+-----------+
+| userName | passWrod  |
++----------+-----------+
+| clive    | 123456    |
+| 51zxw    | 124566    |
+| zxw      | 123123123 |
+| 小王     | xiaowang  |
+| 小明     | xiaoming  |
+| 小红     | xiaohong  |
+| 老王     | laowang   |
++----------+-----------+
+7 rows in set (0.00 sec)
+

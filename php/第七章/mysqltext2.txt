@@ -1,0 +1,93 @@
+mysql> show engines\G
+*************************** 1. row ***************************
+      Engine: FEDERATED
+     Support: NO
+     Comment: Federated MySQL storage engine
+Transactions: NULL
+          XA: NULL
+  Savepoints: NULL
+*************************** 2. row ***************************
+      Engine: MRG_MYISAM
+     Support: YES
+     Comment: Collection of identical MyISAM tables
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 3. row ***************************
+      Engine: MyISAM
+     Support: YES
+     Comment: MyISAM storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 4. row ***************************
+      Engine: BLACKHOLE
+     Support: YES
+     Comment: /dev/null storage engine (anything you write to it disappears)
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 5. row ***************************
+      Engine: CSV
+     Support: YES
+     Comment: CSV storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 6. row ***************************
+      Engine: MEMORY
+     Support: YES
+     Comment: Hash based, stored in memory, useful for temporary tables
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 7. row ***************************
+      Engine: ARCHIVE
+     Support: YES
+     Comment: Archive storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 8. row ***************************
+      Engine: InnoDB
+     Support: DEFAULT
+     Comment: Supports transactions, row-level locking, and foreign keys
+Transactions: YES
+          XA: YES
+  Savepoints: YES
+*************************** 9. row ***************************
+      Engine: PERFORMANCE_SCHEMA
+     Support: YES
+     Comment: Performance Schema
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+9 rows in set (0.00 sec)
+
+mysql> show variables like 
+    -> 'have%';
++----------------------+----------+
+| Variable_name        | Value    |
++----------------------+----------+
+| have_compress        | YES      |
+| have_crypt           | NO       |
+| have_dynamic_loading | YES      |
+| have_geometry        | YES      |
+| have_openssl         | DISABLED |
+| have_profiling       | YES      |
+| have_query_cache     | YES      |
+| have_rtree_keys      | YES      |
+| have_ssl             | DISABLED |
+| have_symlink         | YES      |
++----------------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> show variables like 'storage_engine';
++----------------+--------+
+| Variable_name  | Value  |
++----------------+--------+
+| storage_engine | InnoDB |
++----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> \t

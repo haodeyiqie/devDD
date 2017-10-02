@@ -1,0 +1,37 @@
+mysql> use 51zxw;
+Database changed
+mysql> --编号、姓名、年龄、工资、电话、邮箱、住址、是否结婚
+    -> CREATE table IF NOT EXISTS user(
+    -> id INT,
+    -> userName varchar(20),
+    -> age TINYINT,
+    -> salary FLOAT(8,2),
+    -> tel INT,
+    -> email varchar(20),
+    -> addr varchar(50),
+    -> married TINYINT(1)
+    -> )ENGINE=INNODB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--编号、姓名、年龄、工资、电话、邮箱、住址、是否结婚
+CR' at line 1
+mysql> 
+mysql> CREATE table IF NOT EXISTS user(
+    -> id INT,
+    -> userName varchar(20),
+    -> age TINYINT,
+    -> salary FLOAT(8,2),
+    -> tel INT,
+    -> email varchar(20),
+    -> addr varchar(50),
+    -> married TINYINT(1)
+    -> )ENGINE=INNODB;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| user            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> \t

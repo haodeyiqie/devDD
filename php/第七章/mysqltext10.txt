@@ -1,0 +1,81 @@
+mysql> use 51zxw;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
++-----------------+
+5 rows in set (0.00 sec)
+
+mysql> desc user4;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| userName | varchar(20) | NO   |     | NULL    |                |
+| passWrod | varchar(20) | NO   |     | NULL    |                |
+| addr     | varchar(50) | YES  |     | NULL    |                |
+| age      | tinyint(4)  | NO   |     | 1       |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user4 MODIFY addr varchar(20) NOT NULL DEFAULT '中国';
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc user4;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| userName | varchar(20) | NO   |     | NULL    |                |
+| passWrod | varchar(20) | NO   |     | NULL    |                |
+| addr     | varchar(20) | NO   |     | 中国    |                |
+| age      | tinyint(4)  | NO   |     | 1       |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> CREATE table IF NOT EXISTS user5(
+    -> id INT
+    -> )ENGINE=INNODB;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc user5;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> ALTER TABLE user4 ADD PRIMARY KEY(id);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> ALTER TABLE user5 ADD PRIMARY KEY(id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc user5;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   | PRI | 0       |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> ALTER TABLE user5 DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc user5;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   |     | 0       |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+

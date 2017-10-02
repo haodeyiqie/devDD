@@ -1,0 +1,69 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 51zxw              |
+| clive              |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use 51zxw;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
++-----------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE table IF NOT EXISTS user8(
+    -> id INT PRIMARY KEY,
+    -> userName varchar(20)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc user8;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| userName | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> INSERT user8 values(1,"小明");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT user8 values(1,"小王");
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> INSERT user8 values(2,"小明");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM user8;
++----+----------+
+| id | userName |
++----+----------+
+|  1 | 小明     |
+|  2 | 小明     |
++----+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM user8 WHERE id = 1;
++----+----------+
+| id | userName |
++----+----------+
+|  1 | 小明     |
++----+----------+
+1 row in set (0.01 sec)
+

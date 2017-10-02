@@ -1,0 +1,83 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 51zxw              |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use 51zxw;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_51zxw |
++-----------------+
+| text            |
+| user            |
+| user1           |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE table IF NOT EXISTS user2(
+    -> id INT KEY AUTO_INCREMENT,
+    -> userName varchar(20) NOT NULL,
+    -> passWrod varchar(20) NOT NULL,
+    -> addr varchar(20) DEFAULT '中国'
+    -> )ENGINE=INNODB;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc user2;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| userName | varchar(20) | NO   |     | NULL    |                |
+| passWrod | varchar(20) | NO   |     | NULL    |                |
+| addr     | varchar(20) | YES  |     | 中国    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT user2 values(1,'clive','123456');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT user2 values(1,'clive','123456','中国');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user2;
++----+----------+----------+--------+
+| id | userName | passWrod | addr   |
++----+----------+----------+--------+
+|  1 | clive    | 123456   | 中国   |
++----+----------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user2(userName,passWrod) values('小明','xiaoming');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user2;
++----+----------+----------+--------+
+| id | userName | passWrod | addr   |
++----+----------+----------+--------+
+|  1 | clive    | 123456   | 中国   |
+|  2 | 小明     | xiaoming | 中国   |
++----+----------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user2(userName,passWrod,addr) values('小明','xiaoming','美国');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from user2;
++----+----------+----------+--------+
+| id | userName | passWrod | addr   |
++----+----------+----------+--------+
+|  1 | clive    | 123456   | 中国   |
+|  2 | 小明     | xiaoming | 中国   |
+|  3 | 小明     | xiaoming | 美国   |
++----+----------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT user2(userName,passWrod) values('小明',null);
+ERROR 1048 (23000): Column 'passWrod' cannot be null
